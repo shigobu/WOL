@@ -16,6 +16,43 @@ namespace WOL
             string ipAddress = "8.8.8.7";
             byte[] physicalAddress = { 0, 0, 0, 0, 0, 0 };
 
+            //ファイルから、ipアドレスとMACアドレス取得
+            //自身のパス取得
+            System.Reflection.Assembly assem = typeof(Program).Assembly;
+            string assemPath = assem.Location;
+            string assemDictionary = Path.GetDirectoryName(assemPath);
+
+            //設定ファイルフルパス作成
+            string settingFileName = "Setting.txt";
+            string settingFilePath = Path.Combine(assemDictionary, settingFileName);
+
+            //ファイルから読み込み
+            var sr = new System.IO.StreamReader(settingFilePath);
+            try
+            {
+                ipAddress = sr.ReadLine();
+                string pAddr = sr.ReadLine();
+                string[] pAddrArr = pAddr.Split('-');
+                for(int i = 0; i < 6; i++)
+                {
+                    physicalAddress[i] = byte.Parse(pAddrArr[i], System.Globalization.NumberStyles.HexNumber);
+                }
+            }
+            catch (Exception ex)
+            {
+                setColorError();
+                Console.WriteLine("ファイル読み込みに失敗しました。");
+                Console.WriteLine(ex.Message);
+                System.Threading.Thread.Sleep(2000);
+                return;
+            }
+            finally
+            {
+                sr.Dispose();
+                Console.ResetColor();
+            }
+
+            //pingを送信
             Console.WriteLine("pingの送信・・・");
             var p = new System.Net.NetworkInformation.Ping();
             try
