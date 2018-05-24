@@ -26,8 +26,18 @@ namespace WOL
             string settingFileName = "Setting.txt";
             string settingFilePath = Path.Combine(assemDictionary, settingFileName);
 
+            //存在確認
+            if(!File.Exists(settingFilePath))
+            {
+                setColorError();
+                Console.WriteLine("設定ファイルが見つかりません。");
+                Console.WriteLine(settingFilePath);
+                System.Threading.Thread.Sleep(2000);
+                return;
+            }
+
             //ファイルから読み込み
-            var sr = new System.IO.StreamReader(settingFilePath);
+            var sr = new StreamReader(settingFilePath);
             try
             {
                 ipAddress = sr.ReadLine();
