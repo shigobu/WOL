@@ -33,6 +33,7 @@ namespace WOL
                 Console.WriteLine("設定ファイルが見つかりません。");
                 Console.WriteLine(settingFilePath);
                 System.Threading.Thread.Sleep(2000);
+                Console.ResetColor();
                 return;
             }
 
