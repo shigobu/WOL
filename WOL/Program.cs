@@ -59,8 +59,9 @@ namespace WOL
                 p.Dispose();
                 Console.ResetColor();
             }
-            Console.WriteLine("\nマジックパケットを送信します。");
-
+            Console.WriteLine("マジックパケットを送信します。");
+            SendMagicPacket(physicalAddress);
+            System.Threading.Thread.Sleep(2000);
 
         }
 
