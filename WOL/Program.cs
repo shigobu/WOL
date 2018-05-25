@@ -105,6 +105,7 @@ namespace WOL
             }
             Console.WriteLine("マジックパケットを送信します。");
             SendMagicPacket(physicalAddress);
+            Console.WriteLine("送信しました。");
             System.Threading.Thread.Sleep(2000);
 
         }
