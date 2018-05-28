@@ -196,7 +196,7 @@ namespace WOL
 
             UdpClient client = new UdpClient();
             client.EnableBroadcast = true;
-            client.Send(stream.ToArray(), (int)stream.Position, new IPEndPoint(broad, 0));
+            client.Send(stream.ToArray(), (int)stream.Position, new IPEndPoint(broad, 9));
         }
     }
 }
